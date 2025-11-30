@@ -25,6 +25,7 @@
                                 <tr>
                                     <th class="py-2 px-3">ID</th>
                                     <th class="py-2 px-3">Name</th>
+                                    <th class="py-2 px-3">Description</th>
                                     <th class="py-2 px-3">Actions</th>
                                 </tr>
                             </thead>
@@ -33,6 +34,7 @@
                                 <tr>
                                     <td class="py-2 px-3">{{ $per->id }}</td>
                                     <td class="py-2 px-3 ">{{ $per->name }}</td>
+                                    <td class="py-2 px-3">{{ $per->description ?? '-' }}</td>
                                     <td class="py-2 px-3 flex gap-2">
                                         <a href="{{ route('permissions.show', $per->id) }}"
                                             class="px-3 py-1 bg-blue-700/40 text-blue-200 hover:bg-blue-700 rounded text-sm">

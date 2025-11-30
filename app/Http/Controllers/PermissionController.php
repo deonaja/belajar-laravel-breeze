@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class PermissionController extends Controller
 {
@@ -34,7 +35,8 @@ class PermissionController extends Controller
 
     public function edit(Permission $permission)
     {
-        return view('permissions.edit', compact('permission'));
+        $roles = Role::all();
+        return view('permissions.edit', compact('permission', 'roles'));
     }
 
     public function update(Request $request, Permission $permission)
@@ -42,6 +44,8 @@ class PermissionController extends Controller
         $request->validate(['name' => 'required']);
 
         $permission->update(['name' => $request->name]);
+
+        $permission->syncRoles($request->roles ?? []);
 
         return redirect()->route('permissions.index')->with('success', 'Permission updated!');
     }

@@ -9,9 +9,17 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Register any application services.
      */
+
+    protected $listen = [
+        \Illuminate\Auth\Events\Verified::class => [
+            \App\Listeners\AssignViewerRoleOnEmailVerified::class,
+        ],
+    ];
+
     public function register(): void
     {
         //
+        
     }
 
     /**

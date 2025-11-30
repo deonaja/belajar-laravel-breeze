@@ -11,7 +11,9 @@
             @if($posts->count() === 0)
                 <div class="bg-blue-100 text-blue-800 dark:bg-blue-800 dark:text-blue-100 p-4 rounded-lg">
                     Tidak ada post ditemukan.
-                    <a href="{{ route('posts.create') }}" class="underline">Buat post pertama</a>.
+                    @can('create posts')
+                        <a href="{{ route('posts.create') }}" class="underline">Buat post pertama</a>.
+                    @endcan
                 </div>
             @else
             {{-- Card Box --}}
@@ -46,23 +48,26 @@
                                     </td>
                                     
                                     <td class="py-2 px-3 flex gap-2">
-                                        <a href="{{ route('posts.show', $post->id) }}" 
-                                            class="px-3 py-1 bg-blue-700/40 text-blue-200 rounded hover:bg-blue-700 text-sm">View</a> 
-                                        @role('admin')
+                                        @can('view posts')
+                                            <a href="{{ route('posts.show', $post->id) }}" 
+                                                class="px-3 py-1 bg-blue-700/40 text-blue-200 rounded hover:bg-blue-700 text-sm">View</a> 
+                                        @endcan
+                                        @can('edit posts')
                                             <a href="{{ route('posts.edit', $post->id) }}" 
                                                 class="px-3 py-1 bg-amber-600/40 text-amber-200 rounded hover:bg-yellow-600 text-sm">Edit</a> 
-                                        @endrole
-                                        @role('admin|writer')
-                                        <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button 
-                                                class="px-3 py-1 bg-red-700/40 text-red-200 rounded hover:bg-red-700 text-sm"
-                                                onclick="return confirm('Yakin ingin menghapus post ini?')">
-                                                Delete
-                                            </button>
-                                        </form>
-                                        @endrole
+                                        @endcan
+                                        @can('delete posts')
+                                            <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button 
+                                                    class="px-3 py-1 bg-red-700/40 text-red-200 rounded hover:bg-red-700 text-sm"
+                                                    onclick="return confirm('Yakin ingin menghapus post ini?')">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        @endcan
+                                        
                                     </td>
                                 </tr>
                                 @endforeach

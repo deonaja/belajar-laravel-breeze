@@ -40,4 +40,17 @@ class UserManagementController extends Controller
         
         return redirect()->route('users.index')->with('success', 'User deleted!');
     }
+
+    public function verify(User $user)
+    {
+        $user->email_verified_at = now();
+        $user->save();
+
+        if(!$user->hasRole('viewer')){
+            $user->assignRole('viewer');
+        }
+
+        return back()->with('success', 'User verified & viewer role assigned!');
+    }
+
 }

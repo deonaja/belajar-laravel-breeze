@@ -16,21 +16,27 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
-                        {{ __('Manage Users') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('roles.index')" :active="request()->routeIs('roles.*')">
-                        {{ __('Manage Roles') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('permissions.index')" :active="request()->routeIs('permissions.*')">
-                        {{ __('Manage Permissions') }}
-                    </x-nav-link>
-                </div>
+                @can('manage users')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
+                            {{ __('Manage Users') }}
+                        </x-nav-link>
+                    </div>
+                @endcan
+                @can('manage roles')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('roles.index')" :active="request()->routeIs('roles.*')">
+                            {{ __('Manage Roles') }}
+                        </x-nav-link>
+                    </div>
+                @endcan
+                @can('manage permissions')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('permissions.index')" :active="request()->routeIs('permissions.*')">
+                            {{ __('Manage Permissions') }}
+                        </x-nav-link>
+                    </div>
+                @endcan
                 
             </div>
 

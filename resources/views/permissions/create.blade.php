@@ -16,6 +16,15 @@
                     <input type="text" name="name" required
                         class="w-full mt-1 mb-4 rounded border-gray-300 dark:bg-gray-700 dark:text-gray-100">
 
+                    {{-- Permission Description --}}
+                    <div class="mb-4">
+                        <label class="block mb-1 font-semibold">Description</label>
+                        <textarea name="description" rows="3"
+                            class="w-full rounded border-gray-300 dark:bg-gray-700 dark:text-gray-100"
+                            placeholder="Describe this permission..."
+                        ></textarea>
+                    </div>
+
                     <div class="flex justify-between">
                         <a href="{{ route('permissions.index') }}"
                             class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700">
