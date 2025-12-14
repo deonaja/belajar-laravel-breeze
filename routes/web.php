@@ -11,15 +11,11 @@ use App\Http\Controllers\PermissionController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-// Redirect '/' sesuai status login
-Route::get('/', function () {
-    return Auth::check()
-        ? redirect()->route('dashboard')
-        : redirect()->route('register');
-});
-
 // Semua route internal butuh Login & Verified Email
 Route::middleware(['auth', 'verified'])->group(function () {
+    // CV as root
+    Route::get('/', [DashboardController::class, 'cv'])
+        ->name('cv');
 
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])

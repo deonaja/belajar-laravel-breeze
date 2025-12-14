@@ -13,4 +13,9 @@ class DashboardController extends Controller
         $posts = Post::all();
         return view('dashboard', compact('posts'));
     }
+
+    public function cv()
+    {
+        return view('cv');
+    }
 }
